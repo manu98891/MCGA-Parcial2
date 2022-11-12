@@ -9,7 +9,7 @@ root.render(
   <React.StrictMode>
     <App />
     <h1>Hola  mundo</h1>
-    <h1>Hola  mundo</h1>
+    <h1>Hola  manu</h1>
   </React.StrictMode>
 );
 reportWebVitals();
