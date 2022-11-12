@@ -10,6 +10,7 @@ root.render(
     <App />
     <h1>Hola  mundo</h1>
     <h1>Hola  mundo</h1>
+    <h1> Hola Flor</h1>
   </React.StrictMode>
 );
 reportWebVitals();
