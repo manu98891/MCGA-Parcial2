@@ -1,0 +1,32 @@
+.navbar {
+    display: flex;
+    justify-content: right;
+    padding: 4px 32px;
+    background-color: grey;
+  }
+  
+  .navbar_container {
+    display: flex;
+  }
+  
+  .navbar_items {
+    list-style: none;
+    display: flex;
+    gap: 16px;
+  }
+  
+  .nav_buttons {
+    color: black;
+  }
+  
+  a{
+    font-family: 'Times New Roman', Times, serif;
+    text-decoration: none;
+    font-size: large;
+    color: black;
+  }
+  
+  li a:hover{
+    background-color: #26ff00;
+    padding: 20px;
+  }
