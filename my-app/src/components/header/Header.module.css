@@ -1,0 +1,24 @@
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 16px;
+    padding: 16px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #7f827e;
+    color: black;
+    font-family: 'Helvetica', Times, serif;
+  }
+  .h2_header{
+    font-family: 'Helvetica', Times, serif;
+    font-size: larger;
+    color: black;
+  }
+  .p_header{
+    font-family: 'Helvetica', Times, serif;
+    font-weight: bold;
+    font-size: large;
+  }

@@ -20,13 +20,13 @@
   }
   
   a{
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Helvetica', Times, serif;
     text-decoration: none;
     font-size: large;
     color: black;
   }
   
   li a:hover{
-    background-color: #26ff00;
+    background-color: #51ff32;
     padding: 20px;
   }
