@@ -4,6 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getProducts } from './../../../redux/thunks';
 import { cleanError } from './../../../redux/actions';
 import store from '../../../redux/store';
+import { useForm } from "react-hook-form";
+import Button from '../../Sharedbuttons/buttons';
+import Input from '../../SharedImputs/inputs';
 
 const Products = () => {    //hace un get del dispatcher
     const dispatch = useDispatch();
@@ -12,6 +15,30 @@ const Products = () => {    //hace un get del dispatcher
     const error = useSelector((store) => store.products.error);
     const isLoading = useSelector((store) => store.products.isFetching);
     
+    const {
+        register, //Hook de la libreria react-hook-form para registrar cada input del form
+        handleSubmit, //Funcion para ejecutar el onSubmit del form
+        formState: { errors }, //Manejo de errores del form
+      } = useForm();
+
+      const onSubmit = (data) => {
+        //funcion tuya del onsubmit que le pasas al handleSubmit
+        //AGREAGAR
+        console.log(data);
+      };
+    
+      const updateProduct = (id) => {
+        console.log("update btn'");
+        //UPDATE
+        const product=products.filter((product)=>product._id===id);
+        console.log(product);
+        
+      };
+      const deleteProduct = () => {
+        console.log("delete btn'");
+        //DELETE
+      };
+
     useEffect(() => {
         // trae la lista de produts cuando el store esta vacío
         if (!products.length) {
@@ -28,12 +55,10 @@ const Products = () => {    //hace un get del dispatcher
         return <p>Loading... </p>
     }
   
+    
     return (
       <section>
-            {products.map((product) => {return (
-                <p>{product.name}</p>
-            )})}
-
+        
             <table>
                     <thead>
                         <tr>
@@ -44,34 +69,39 @@ const Products = () => {    //hace un get del dispatcher
                         </tr>
                     </thead>
                     <tbody>
-                        {products.map((product) => {
-                            console.log(products);
-                        return (
+                        {products.map((product) => {return (
                             <tr key={product._id}>
                             <td>{product.name}</td>
-                            <td>$ {product.price['$numberDecimal']}</td>
+                            <td>$ {product.price}</td>
                             <td>{product.stock}</td>
                             <td >
-                                <Link to={`/products/${product._id}`}>
-                                <button>
-                                    {/* <img src="/assets/icons/edit.svg" alt="update" /> */}
-                                </button>
-                                </Link>
-                                <button
-                                
-                                onClick={() => {
-                                    // setShowModal(true);
-                                    // setProductId(product._id);
-                                }}
-                                >
-                                {/* <img src="/assets/icons/trash.svg" alt="delete" /> */}
-                                </button>
+                            <Button value="Update" onClick={()=>updateProduct(product._id)}/>
+                            <Button value="Delete"/>
                             </td>
                             </tr>
                         );
                         })}
                     </tbody>
                 </table>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <Input //Componente custom de input q vos creaste
+                        type="text"
+                        register={register}
+                        label="name"
+                        required={true}
+                        errors={errors.name}
+                    />
+                    <Input
+                        type="number"
+                        register={register}
+                        label="price"
+                        required={true}
+                        errors={errors.price}
+                    />
+                    <Input type="text" register={register} label="stock" required={false} />
+                    
+                    <Button value="Submit" type="submit" />
+                </form>
       </section>
     );
 };

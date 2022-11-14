@@ -5,7 +5,7 @@ const Main = () => {
   return (
     <main className={styles.main}>
       <p className={styles.p_main}>
-        Product CRUD
+        2022 Segundo Cuatri
       </p>
     </main>
   );

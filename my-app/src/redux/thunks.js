@@ -16,12 +16,11 @@ import {
     deleteProductError
   } from './actions';
   
-  // Async Actions definition
+  // define las funciones
   export const getProducts = () => {
     return (dispatch) => {
-      // Dispatch (execute) the redux action to indicate the request will start
       dispatch(getProductsPending());
-      // Make the backend request
+      // request a backend
       return fetch(`${process.env.REACT_APP_API}/products`)
         .then((response) => {
           if (response.status !== 200) {
@@ -32,20 +31,17 @@ import {
           return response.json();
         })
         .then((response) => {
-          // Dispatch (execute) the redux action to save the response in Redux
-          //payload
+          // guarda la respuesta en redux
           dispatch(getProductsSuccess(response.data));
         })
         .catch((error) => {
-          // Dispatch (execute) the redux action to save the error in Redux
-          // Remember always save an string, it is guaranteed using "error.toString()"
+          // ejecuta la accion para guardar el error en redux, recordar que los objetos se pasan como strings
           dispatch(getProductsError(error.toString()));
         });
     };
   };
   
-  // See the comments above for reference.
-  // On this case, we are passing an "id" params to send it to the backend
+  // usamos el parametro id para mandarselo al backend
   export const getProductById = (id) => {
     return (dispatch) => {
       dispatch(getProductByIdPending());
@@ -60,8 +56,6 @@ import {
         })
         .then((response) => {
           dispatch(getProductByIdSuccess(response.data[0]));
-          // it is necessary to return the response to get it on the ".then" in
-          // the component when the action is dispatched
           return response.data[0];
         })
         .catch((error) => {
