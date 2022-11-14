@@ -1,12 +1,12 @@
 import './App.css';
-import Routes from './Routes';
 import { BrowserRouter } from 'react-router-dom';
+import Layout from './components/layouts/layouts';
 
 const App = () =>{
 return(
   <div>
     <BrowserRouter>
-      <Routes/>
+    <Layout/>
     </BrowserRouter>
   </div>
 )

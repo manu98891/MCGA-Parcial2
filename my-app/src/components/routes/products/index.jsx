@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts } from './../../../redux/thunks';
 import { cleanError } from './../../../redux/actions';
-import store from './../../../redux/store';
+import store from '../../../redux/store';
 
 const Products = () => {    //hace un get del dispatcher
     const dispatch = useDispatch();
@@ -13,9 +13,9 @@ const Products = () => {    //hace un get del dispatcher
     const isLoading = useSelector((store) => store.products.isFetching);
     
     useEffect(() => {
-        // get products list when the list on Redux is empty
+        // trae la lista de produts cuando el store esta vacío
         if (!products.length) {
-            // Dispatch (execute) the async redux action to get the product list
+            // el dispatch ejecuta la acción asíncrona de redux para traer la lista de productos
             dispatch(getProducts());
         }
     }, [products]);
@@ -31,7 +31,7 @@ const Products = () => {    //hace un get del dispatcher
     return (
       <section>
             {products.map((product) => {return (
-                <p>product.name</p>
+                <p>{product.name}</p>
             )})}
 
             <table>

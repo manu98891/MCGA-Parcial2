@@ -1,4 +1,3 @@
-// Action type constants definitionN
 export const GET_PRODUCTS_PENDING = 'GET_PRODUCTS_PENDING';
 export const GET_PRODUCTS_SUCCESS = 'GET_PRODUCTS_SUCCESS';
 export const GET_PRODUCTS_ERROR = 'GET_PRODUCTS_ERROR';
@@ -20,10 +19,9 @@ export const DELETE_PRODUCT_SUCCESS = 'DELETE_PRODUCT_SUCCESS';
 export const DELETE_PRODUCT_ERROR = 'DELETE_PRODUCT_ERROR';
 
 export const CLEAN_ERROR = 'CLEAN_ERROR';
-
 export const CLEAN_SELECTED_ITEM = 'CLEAN_SELECTED_ITEM';
 
-// Actions definition
+
 export const getProductsPending = () => {
   return {
     type: GET_PRODUCTS_PENDING

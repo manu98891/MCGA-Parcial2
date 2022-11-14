@@ -31,7 +31,6 @@ import {
         return {
           ...state,
           isFetching: true,
-          // Reset the error value with the initial error value
           error: initialState.error
         };
       }
@@ -78,11 +77,10 @@ import {
           error: initialState.error
         };
       }
-  case CREATE_PRODUCT_SUCCESS: {
+  case CREATE_PRODUCT_SUCCESS: {  //agrega el nuevo producto a la lista
         return {
           ...state,
           isFetching: false,
-          // Add the new product created into the previous product list
           list: [...state.list, action.payload]
         };
       }
@@ -104,7 +102,6 @@ import {
         return {
           ...state,
           isFetching: false,
-          // Update the updated product into the previous product list
           list: state.list.map((item) => {
             if (item._id === action.payload._id) {
               return action.payload;
@@ -131,7 +128,6 @@ import {
         return {
           ...state,
           isFetching: false,
-          // Remove the removed product into the previous product list
           list: state.list.filter((item) => item._id !== action.payload)
         };
       }

@@ -7,6 +7,9 @@ const Footer = () => {
       <p className={styles.p_footer}>
         Parcial 2 MCGA - UAI
       </p>
+      <p className={styles.p_footer}>        
+        Losada & Nardi
+      </p>
     </footer>
   );
 };
