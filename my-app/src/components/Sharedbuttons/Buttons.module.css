@@ -1,0 +1,16 @@
+.Button{
+    font-family: "Helvetica", Arial, sans-serif;
+    text-decoration: none;
+    font-size:medium;
+    color: #fff;;
+    background-color: #202124;
+    border-color: #51ff32;
+    border-radius: 8%;
+  }
+  
+  .Button:hover{
+    background-color: #51ff32;
+    color: black;
+    font-weight: bold;
+    padding: 5px;
+  }
