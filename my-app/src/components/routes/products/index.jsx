@@ -21,28 +21,39 @@ const Products = () => {    //hace un get del dispatcher
     const [isAdding, setIsAdding] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
     const [isDeleting, setIsDeleting] = useState(false);
+    const [productToEdit, setProductToEdit] = useState();
 
 
     const {
         register, //Hook para tomar los inputs del form
         handleSubmit, //ejecuta el onSubmit
         formState: { errors },
-      } = useForm();
+      } = useForm({
+        defaultValues: productToEdit || null,
+      });
 
       //AGREAGAR
       const onSubmit = (data) => {
         console.log(data);
         dispatch(createProduct(data));
       };
-        //UPDATE
-      const handleUpdateProduct = (id, values) => {
-        // console.log("update btn'");
-        // const product=products.filter((product)=>product._id===id);
-        // console.log(product);
+
+      //UPDATE
+      const handleUpdateProduct = (product) => {
         setIsEditing(true);
-        dispatch(updateProduct(id, values));
-        
+        setProductToEdit(product)
       };
+
+      const submitEdit = (product) => {
+        console.log(product)
+        dispatch(updateProduct(productToEdit._id, {
+            name: product.name,
+            stock: product.stock,
+            price: product.price
+        }));
+        setIsEditing(false);
+        setProductToEdit({});
+      }
       //DELETE
       const handleDeleteProduct = (id) => {
         console.log(id);
@@ -86,7 +97,7 @@ const Products = () => {    //hace un get del dispatcher
                             <td className={styles.tbody}>$ {product.price}</td>
                             <td className={styles.tbody}>{product.stock}</td>
                             <td >
-                            <Button value="Update" onClick={()=>handleUpdateProduct(id, values)}/>
+                            <Button value="Update" onClick={()=>handleUpdateProduct(product)}/>
                             <Button value="Delete" onClick={()=>handleDeleteProduct(product._id)}/>
                             </td>
                             </tr>
@@ -138,9 +149,10 @@ const Products = () => {    //hace un get del dispatcher
                 {/* Modal Update */}
                 <Modal isOpen={isEditing} title={"Update a Product"} 
                     handleClose={() => {
-                        setIsEditing(false)
+                        setIsEditing(false);
+                        setProductToEdit({});
                         }}>
-                    <form onSubmit={handleSubmit(handleUpdateProduct)}>
+                    <form onSubmit={handleSubmit(submitEdit)}>
                         <Input
                             type="text"
                             name={"name"}
@@ -173,6 +185,3 @@ const Products = () => {    //hace un get del dispatcher
     );
 };
   export default Products;
-
-
-
