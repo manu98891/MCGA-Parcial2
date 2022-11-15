@@ -8,7 +8,7 @@ const Input = ({ label, type, register, required, errors }) => {
       <input
         type={type}
         {...register(label, { required })}
-        className={styles.input_style}
+        className={styles.Input}
       />
       {errors && <span>{`This field is required:${label}`}</span>}
     </>
