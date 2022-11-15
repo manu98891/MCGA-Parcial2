@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProducts, deleteProduct } from './../../../redux/thunks';
+import { getProducts, deleteProduct, createProduct, updateProduct } from './../../../redux/thunks';
 import { cleanError } from './../../../redux/actions';
 import store from '../../../redux/store';
 import { useForm } from "react-hook-form";
@@ -31,14 +31,16 @@ const Products = () => {    //hace un get del dispatcher
 
       //AGREAGAR
       const onSubmit = (data) => {
-        //funcion mia del onsubmit que le pasas al handleSubmit
         console.log(data);
+        dispatch(createProduct(data));
       };
         //UPDATE
-      const handleUpdateProduct = (id) => {
-        console.log("update btn'");
-        const product=products.filter((product)=>product._id===id);
-        console.log(product);
+      const handleUpdateProduct = (id, values) => {
+        // console.log("update btn'");
+        // const product=products.filter((product)=>product._id===id);
+        // console.log(product);
+        setIsEditing(true);
+        dispatch(updateProduct(id, values));
         
       };
       //DELETE
@@ -84,7 +86,7 @@ const Products = () => {    //hace un get del dispatcher
                             <td className={styles.tbody}>$ {product.price}</td>
                             <td className={styles.tbody}>{product.stock}</td>
                             <td >
-                            <Button value="Update" onClick={()=>handleUpdateProduct(product._id)}/>
+                            <Button value="Update" onClick={()=>handleUpdateProduct(id, values)}/>
                             <Button value="Delete" onClick={()=>handleDeleteProduct(product._id)}/>
                             </td>
                             </tr>
@@ -94,10 +96,12 @@ const Products = () => {    //hace un get del dispatcher
                 </table>
                 
                 <h3>Add a Product:</h3>
-                <Button onClick={() => {
+                <Button value='Add a product' onClick={() => {
                         setIsAdding(true)
                     }}
                 />
+                
+                {/* Modal Add */}
                 <Modal isOpen={isAdding} title={"Add a Product"} 
                     handleClose={() => {
                             setIsAdding(false)
@@ -105,6 +109,7 @@ const Products = () => {    //hace un get del dispatcher
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <Input
                             type="text"
+                            name={"name"}
                             register={register}
                             label="Name:"
                             required={true}
@@ -112,6 +117,7 @@ const Products = () => {    //hace un get del dispatcher
                         />
                         <Input
                             type="number"
+                            name={"price"}
                             register={register}
                             label="Price:"
                             required={true}
@@ -119,12 +125,48 @@ const Products = () => {    //hace un get del dispatcher
                         />
                         <Input 
                             type="text"
+                            name={"stock"}
                             register={register}
                             label="Stock:"
                             required={true}
                             errors={errors.stock} 
                         />
-                        
+                        <Button value='send' type='submit'></Button>
+                    </form>
+                </Modal>
+
+                {/* Modal Update */}
+                <Modal isOpen={isEditing} title={"Update a Product"} 
+                    handleClose={() => {
+                        setIsEditing(false)
+                        }}>
+                    <form onSubmit={handleSubmit(handleUpdateProduct)}>
+                        <Input
+                            type="text"
+                            name={"name"}
+                            register={register}
+                            label="Name:"
+                            required={true}
+                            errors={errors.name}
+                        />
+                        <Input
+                            type="number"
+                            name={"price"}
+                            register={register}
+                            label="Price:"
+                            required={true}
+                            errors={errors.price}
+                        />
+                        <Input 
+                            type="text"
+                            name={"stock"}
+                            register={register}
+                            label="Stock:"
+                            required={true}
+                            errors={errors.stock} 
+                        />
+                        <Button value='save' type='submit'></Button>
+
                     </form>
                 </Modal>
       </section>
